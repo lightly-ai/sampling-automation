@@ -49,6 +49,7 @@ def main(args):
     if args.num_samples < 1:
         raise ValueError(f"--num-samples must be > 0 but is {args.num_samples}")
 
+    print('Connecting to the API')
     client = lightly.api.ApiWorkflowClient(
         token=args.token,
         dataset_id=args.dataset_id,
@@ -62,14 +63,14 @@ def main(args):
         n_samples=args.num_samples,
         name=args.new_tag_name,
     )
-    print('Running coreset sampling')
+    print('Running CORESET sampling')
     new_tag_data = client.sampling(sampler_config=sampler_config)
     if args.output_file:
         print(f'Saving filenames to {args.output_file}')
         filenames = client.get_filenames_in_tag(tag_data=new_tag_data)
         with open(args.output_file, 'w') as file:
             for filename in filenames:
-                file.write(filename)
+                file.write(f"{filename}\n")
     print('Done!')
 
 if __name__ == '__main__':

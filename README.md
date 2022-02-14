@@ -2,11 +2,13 @@
 
 Utility code to trigger a coreset sampling through the Lightly API. 
 
-An example of the workflow is provided in `example_run.sh`, including the initial
-dataset creation, model training, data embedding, data upload, and coreset sampling.
+An example of the workflow is provided in [`example_run.sh`](https://github.com/lightly-ai/sampling-automation/blob/main/example_run.sh), 
+including the initial dataset creation, model training, data embedding, 
+data upload, and coreset sampling.
 
+### Requirements
 
-Requires [Lightly](https://github.com/lightly-ai/lightly) to be installed:
+[Lightly](https://github.com/lightly-ai/lightly) must be installed:
 ```
 pip install lightly
 ```
@@ -29,7 +31,8 @@ should be created after sampling and will contain all the sampled images.
 
 ### Configuration
 
-**Server Location**
+#### Server Location
+
 The Lightly Server location is controlled by the `LIGHTLY_SERVER_LOCATION` 
 environment variable (`'https://api.lightly.ai'` by default). Make sure to set
 it before running the script if you have a local deployment, for example:
@@ -38,12 +41,23 @@ export LIGHTLY_SERVER_LOCATION='http://api.lightly-docker'
 python run_coreset.py ...
 ```
 
-**Dataset Name/Dataset ID**
+#### Dataset Name/Dataset ID
+
 The script allows you to either specify the dataset by name (`--dataset-name`)
 or the by id (`--dataset-id`). It does not matter which one you use, just make
 sure that it refers to the dataset you uploaded before to the Lightly platform.
 
-**run_coreset.py options**
+#### Saving the sampled filenames
+
+The `--output-file` option allows you to save the filenames of the sampled
+images to a file. The fill will contain one filename per line:
+```
+img1.png
+img4.png
+img10.png
+```
+
+#### run_coreset.py options
 
 Output from `python run_coreset.py --help`:
 
